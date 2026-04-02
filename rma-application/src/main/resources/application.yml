@@ -34,3 +34,7 @@ springdoc:
     path: /swagger-ui.html
   api-docs:
     path: /api-docs
+
+jwt:
+  secret: rma-super-secret-key-that-is-at-least-256-bits-long-for-hs256-algorithm
+  expiration-ms: 86400000
