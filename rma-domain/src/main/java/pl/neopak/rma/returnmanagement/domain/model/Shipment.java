@@ -18,6 +18,20 @@ public class Shipment {
         this.dimensions = dimensions;
     }
 
+    private Shipment(String shipmentId, PackageDimensions dimensions,
+                     String labelUrl, String trackingNumber, boolean received) {
+        this.shipmentId = shipmentId;
+        this.dimensions = dimensions;
+        this.labelUrl = labelUrl;
+        this.trackingNumber = trackingNumber;
+        this.received = received;
+    }
+
+    public static Shipment reconstruct(String shipmentId, PackageDimensions dimensions,
+                                       String labelUrl, String trackingNumber, boolean received) {
+        return new Shipment(shipmentId, dimensions, labelUrl, trackingNumber, received);
+    }
+
     public void assignLabel(String labelUrl, String trackingNumber) {
         this.labelUrl = labelUrl;
         this.trackingNumber = trackingNumber;

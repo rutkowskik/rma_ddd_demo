@@ -54,6 +54,27 @@ public class ReturnRequest {
         return rma;
     }
 
+    public static ReturnRequest reconstruct(
+            ReturnRequestId id,
+            RmaNumber rmaNumber,
+            OrderReference orderReference,
+            CustomerInfo customerInfo,
+            ReturnStatus status,
+            boolean paymentConfirmed,
+            Instant receivedAt,
+            SlaDeadline slaDeadline,
+            Instant createdAt,
+            List<ReturnLineItem> lineItems,
+            List<Shipment> shipments) {
+        var rma = new ReturnRequest(id, rmaNumber, orderReference, customerInfo, status, createdAt);
+        rma.paymentConfirmed = paymentConfirmed;
+        rma.receivedAt = receivedAt;
+        rma.slaDeadline = slaDeadline;
+        rma.lineItems.addAll(lineItems);
+        rma.shipments.addAll(shipments);
+        return rma;
+    }
+
     public static ReturnRequest registerBlind(RmaNumber rmaNumber, String parcelDescription) {
         var rma = new ReturnRequest(ReturnRequestId.generate(), rmaNumber,
                 new OrderReference("UNKNOWN", SourceSystem.MANUAL),
@@ -154,6 +175,18 @@ public class ReturnRequest {
 
     public RmaNumber rmaNumber() {
         return rmaNumber;
+    }
+
+    public OrderReference orderReference() {
+        return orderReference;
+    }
+
+    public CustomerInfo customerInfo() {
+        return customerInfo;
+    }
+
+    public Instant receivedAt() {
+        return receivedAt;
     }
 
     public ReturnStatus status() {

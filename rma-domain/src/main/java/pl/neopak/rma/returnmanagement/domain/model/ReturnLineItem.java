@@ -22,6 +22,13 @@ public class ReturnLineItem {
         this.reason = reason;
     }
 
+    public static ReturnLineItem reconstruct(String productId, int quantity,
+                                               ReturnReason reason, ConditionAssessment conditionAssessment) {
+        var item = new ReturnLineItem(productId, quantity, reason);
+        item.conditionAssessment = conditionAssessment;
+        return item;
+    }
+
     public void assess(ConditionAssessment condition) {
         if (this.conditionAssessment != null) {
             throw new IllegalStateException("Ocena stanu juz zostala ustawiona dla produktu: " + productId);
