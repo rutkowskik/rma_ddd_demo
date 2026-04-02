@@ -38,3 +38,10 @@ springdoc:
 jwt:
   secret: rma-super-secret-key-that-is-at-least-256-bits-long-for-hs256-algorithm
   expiration-ms: 86400000
+
+payu:
+  base-url: https://secure.snd.payu.com
+  pos-id: 300746
+  md5-key: b6ca15b0d1020e8094d9b5f8d9285b92
+  oauth-client-id: 300746
+  oauth-client-secret: 2ee86a66e5d97e3fadc400c9f19b065d
