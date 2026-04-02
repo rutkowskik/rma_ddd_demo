@@ -1,6 +1,6 @@
 package pl.neopak.rma.payment.adapter.out;
 
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-@EnableConfigurationProperties(PayUProperties.class)
 public class PayURestAdapter implements PaymentGateway {
 
     private final PayUProperties properties;
@@ -26,6 +25,7 @@ public class PayURestAdapter implements PaymentGateway {
     private String cachedToken;
     private Instant tokenExpiry = Instant.EPOCH;
 
+    @Autowired
     public PayURestAdapter(PayUProperties properties) {
         this.properties = properties;
         this.restClient = RestClient.builder()
