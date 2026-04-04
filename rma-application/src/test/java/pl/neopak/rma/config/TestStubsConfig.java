@@ -3,9 +3,12 @@ package pl.neopak.rma.config;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import pl.neopak.rma.returnmanagement.domain.model.RmaNumber;
+import pl.neopak.rma.returnmanagement.port.in.QueryReturnRequestUseCase;
 import pl.neopak.rma.returnmanagement.port.out.*;
 
 import java.time.Instant;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -44,6 +47,21 @@ public class TestStubsConfig {
     @Bean
     public ShipmentTrackingRepository shipmentTrackingRepository() {
         return trackingNumber -> Optional.empty();
+    }
+
+    @Bean
+    public QueryReturnRequestUseCase queryReturnRequestUseCase() {
+        return new QueryReturnRequestUseCase() {
+            @Override
+            public Optional<Object> findByRmaNumber(String rmaNumber) {
+                return Optional.empty();
+            }
+
+            @Override
+            public List<Object> findByStatus(String status) {
+                return Collections.emptyList();
+            }
+        };
     }
 
 }
