@@ -3,11 +3,13 @@ package pl.neopak.rma.returnmanagement;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
@@ -86,9 +88,19 @@ class ReturnFlowIntegrationTest {
     @MockBean
     CourierGateway courierGateway;
 
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
     @BeforeEach
     void resetWireMock() {
         wireMock.resetAll();
+    }
+
+    @AfterEach
+    void cleanDatabase() {
+        jdbcTemplate.execute("DELETE FROM return_management.shipments");
+        jdbcTemplate.execute("DELETE FROM return_management.return_line_items");
+        jdbcTemplate.execute("DELETE FROM return_management.return_requests");
     }
 
     @Test
