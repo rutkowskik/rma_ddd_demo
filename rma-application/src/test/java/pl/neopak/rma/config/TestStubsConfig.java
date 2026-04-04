@@ -2,8 +2,6 @@ package pl.neopak.rma.config;
 
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
-import pl.neopak.rma.returnmanagement.domain.model.PackageDimensions;
-import pl.neopak.rma.returnmanagement.domain.model.ReturnRequest;
 import pl.neopak.rma.returnmanagement.domain.model.RmaNumber;
 import pl.neopak.rma.returnmanagement.port.out.*;
 
@@ -48,18 +46,4 @@ public class TestStubsConfig {
         return trackingNumber -> Optional.empty();
     }
 
-    @Bean
-    public CourierGateway courierGateway() {
-        return new CourierGateway() {
-            @Override
-            public String createShipment(PackageDimensions dimensions, String rmaNumber) {
-                return "http://courier.test/labels/" + rmaNumber + ".pdf";
-            }
-
-            @Override
-            public byte[] getLabel(String shipmentId) {
-                return new byte[0];
-            }
-        };
-    }
 }

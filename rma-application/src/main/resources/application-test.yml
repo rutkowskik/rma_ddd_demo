@@ -20,3 +20,14 @@ spring:
       - payment_integration
       - identity_access
     baseline-on-migrate: true
+
+courier:
+  inpost:
+    base-url: http://localhost:9999
+    api-key: test-key
+    organization-id: test-org
+  dpd:
+    base-url: http://localhost:9999
+    login: test
+    password: test
+    fid: "9999"

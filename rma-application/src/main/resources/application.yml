@@ -45,3 +45,14 @@ payu:
   md5-key: b6ca15b0d1020e8094d9b5f8d9285b92
   oauth-client-id: 300746
   oauth-client-secret: 2ee86a66e5d97e3fadc400c9f19b065d
+
+courier:
+  inpost:
+    base-url: https://api-shipx-pl.easypack24.net
+    api-key: ${INPOST_API_KEY:sandbox-api-key}
+    organization-id: ${INPOST_ORG_ID:12345}
+  dpd:
+    base-url: https://dpdservices.dpd.com.pl
+    login: ${DPD_LOGIN:neopak}
+    password: ${DPD_PASSWORD:sandbox-pass}
+    fid: ${DPD_FID:1234}
